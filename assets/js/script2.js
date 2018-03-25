@@ -42,5 +42,31 @@ function doTurn(target) {
     if(target.innerHTML === "") {
         target.innerHTML = currentSymbol;
     }
+    var winnerLine = findWinnerLine(playerTurn);
+    if (winnerLine.length) {
+        alert("winner: "+currentSymbol);
+    }
     playerTurn = playerTurn == p1 ? p2 : p1;
+}
+
+function findWinnerLine(playerTurn) {
+    var rows = document.getElementsByTagName('tr');
+    var count = 0;
+    for (var i = 0; i < rows.length; i++) {
+        var cell = rows.item(i).cells;
+        for (var j = 0; j < rows.length; j++) {
+            if (cell.item(j).innerHTML !== playerTurn.symbol) {
+                break;
+            }
+            count++;
+        }
+        if (count === 3){
+            return rows;
+        }
+    }
+    return [];
+}
+
+function rowWinner(player) {
+
 }
