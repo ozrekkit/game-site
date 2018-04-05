@@ -24,7 +24,7 @@ resetBtn.addEventListener("click", resetFieldSymbol);
 function resetFieldSymbol() {
     console.log('HI');
     var x = document.getElementsByTagName('TD');
-    for (var i = 0; i < x.length; i++ ){
+    for (var i = 0; i < x.length; i++) {
         x.item(i).innerHTML = "";
 
     }
@@ -39,34 +39,74 @@ function ClickAction(event) {
 function doTurn(target) {
     var currentSymbol = playerTurn.symbol;
     console.log(currentSymbol);
-    if(target.innerHTML === "") {
+    if (target.innerHTML === "") {
         target.innerHTML = currentSymbol;
     }
-    var winnerLine = findWinnerLine(playerTurn);
-    if (winnerLine.length) {
-        alert("winner: "+currentSymbol);
+    var findWinnerLine = winnerLine(currentSymbol);
+    if (findWinnerLine) {
+        //TODO cletksmkdnf;lksj;
     }
     playerTurn = playerTurn == p1 ? p2 : p1;
 }
 
-function findWinnerLine(playerTurn) {
-    var rows = document.getElementsByTagName('tr');
-    var count = 0;
+function winnerLine(currentSymbol) {
+    var currentRow = findWinnerRow(currentSymbol);
+    if (currentRow.length) {
+        console.log('hi mr. Row')
+    }
+    var currentRow = findWinnerRow();
+    if (currentRow.length) {
+        console.log('hi')
+    }
+    var currentRow = findWinnerRow();
+    if (currentRow.length) {
+        console.log('hi')
+    }
+}
+
+function findWinnerRow(currentSymbol) {
+    var field = document.getElementById('game-field');
+    var rows = field.getElementsByTagName('TR');
+    var row;
+    console.log(rows[0].cells[0]);
+    console.log('hello world');
     for (var i = 0; i < rows.length; i++) {
-        var cell = rows.item(i).cells;
+        row = rows[i].cells;
+        var count = 0;
         for (var j = 0; j < rows.length; j++) {
-            if (cell.item(j).innerHTML !== playerTurn.symbol) {
-                break;
+            var cell = row[j];
+            if (cell.innerHTML === currentSymbol) {
+                count++;
             }
-            count++;
         }
-        if (count === 3){
-            return rows;
+        if (count === row.length) {
+            return row;
         }
+
     }
     return [];
 }
 
-function rowWinner(player) {
+function findWinnerCol() {
+    // var field = document.getElementById('game-field');
+    // var rows = field.getElementsByTagName('TR');
+    // var row;
+    // console.log(rows.cells);
+    // console.log('hello world');
+    // for (var i = 0; i < rows.length; i++) {
+    //
+    // }
+    return [1, 2];
+}
 
+function findWinnerDiagonal() {
+    // var field = document.getElementById('game-field');
+    // var rows = field.getElementsByTagName('TR');
+    // var row;
+    // console.log(rows.cells);
+    // console.log('hello world');
+    // for (var i = 0; i < rows.length; i++) {
+    //
+    // }
+    return [1, 2];
 }
